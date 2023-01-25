@@ -3,12 +3,17 @@ const inputBtn = document.getElementById("input-btn")
 const txtInput = document.getElementById("input")
 const ul_EL = document.getElementById("ulEl")
 
+let leadsLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
+if(leadsLocalStorage){
+  myLeads = leadsLocalStorage
+  readerLeads()
+}
 
 inputBtn.addEventListener("click", function(){
  myLeads.push(txtInput.value)
  txtInput.value = ""
- console.log(myLeads)
+ localStorage.setItem("myLeads", JSON.stringify(myLeads))
  readerLeads()
 })
 
