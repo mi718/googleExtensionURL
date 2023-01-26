@@ -4,6 +4,7 @@ const deleteBtn = document.getElementById("delete-btn")
 const txtInput = document.getElementById("input")
 const ul_EL = document.getElementById("ulEl")
 const leadsLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
+const tabBtn = document.getElementById("tab-btn")
 
 if(leadsLocalStorage){
   myLeads = leadsLocalStorage
@@ -36,4 +37,13 @@ inputBtn.addEventListener("click", function(){
  txtInput.value = ""
  localStorage.setItem("myLeads", JSON.stringify(myLeads))
  render(myLeads)
+})
+
+tabBtn.addEventListener('click', function(){
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    myLeads.push(tabs[0].url)
+    localStorage.setItem("myLeads", JSON.stringify(myLeads))
+    render(myLeads)
+
+  })
 })
